@@ -1,0 +1,17 @@
+FROM debian:bullseye
+
+WORKDIR /var/www/html
+
+RUN apt-get -y update
+
+RUN apt-get install curl -y  
+
+RUN apt-get install -y php7.4-fpm php7.4-mysql mariadb-client
+
+COPY ./tools/script.sh /var/www/html
+
+RUN chmod +x ./script.sh
+
+EXPOSE 9000
+
+CMD ["bash", "./script.sh"]
